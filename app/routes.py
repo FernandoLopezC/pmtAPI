@@ -93,7 +93,6 @@ def register():
 
 
 @app.route('/check_premium/<user>', methods=['GET','POST'])
-@login_required
 def check_premium(user):
     """
     fetches the details of an user to fill in form data when updating that user
@@ -114,8 +113,7 @@ def check_premium(user):
 
 
 @app.route('/login_user/<user>/<pw>', methods=['GET', 'POST'])
-@login_required
-def check_premium(user, pw):
+def login_app(user, pw):
     """
     fetches the details of an user to fill in form data when updating that user
     """
@@ -127,6 +125,40 @@ def check_premium(user, pw):
         user = DbUser(cur_user)
         if user.check_password(pw):
             UserObj["login"] = True
+            if cur_user.premium:
+                UserObj["premium"] = True
+            else:
+                UserObj["premium"] = False
+
+        else:
+            UserObj["login"] = False
+
+        return jsonify(UserObj)
+    else:
+        return "None"
+
+@app.route('/register_user/<name>/<user>/<pw>', methods=['GET', 'POST'])
+def register_app(name, user, pw):
+    """
+    fetches the details of an user to fill in form data when updating that user
+    """
+    if user:
+        user = users_tbl(name=name, email=user)
+        user.set_password(pw)
+        db.session.add(user)
+        db.session.commit()
+        cur_user = users_tbl.query.filter_by(email=user).first()
+
+        UserObj = {}
+
+        user = DbUser(cur_user)
+        if user.check_password(pw):
+            UserObj["login"] = True
+            if cur_user.premium:
+                UserObj["premium"] = True
+            else:
+                UserObj["premium"] = False
+
         else:
             UserObj["login"] = False
 
@@ -136,7 +168,6 @@ def check_premium(user, pw):
 
 
 @app.route("/update_details", methods=['Get', 'POST'])
-@login_required
 def update_details():
 
     form = UpdateUser()

@@ -32,7 +32,6 @@ CREATE TABLE public.users (
     name character varying(60) NOT NULL,
     email character varying(60) NOT NULL,
     password character varying(120),
-    date_of_birth date,
     premium boolean DEFAULT false
 );
 
