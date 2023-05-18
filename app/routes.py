@@ -143,26 +143,11 @@ def register_app(name, user, pw):
     fetches the details of an user to fill in form data when updating that user
     """
     if user:
-        user = users_tbl(name=name, email=user)
-        user.set_password(pw)
+        user = users_tbl(name=str(name), email=str(user))
+        user.set_password(str(pw))
         db.session.add(user)
         db.session.commit()
-        cur_user = users_tbl.query.filter_by(email=user).first()
-
-        UserObj = {}
-
-        user = DbUser(cur_user)
-        if user.check_password(pw):
-            UserObj["login"] = True
-            if cur_user.premium:
-                UserObj["premium"] = True
-            else:
-                UserObj["premium"] = False
-
-        else:
-            UserObj["login"] = False
-
-        return jsonify(UserObj)
+        return jsonify(True)
     else:
         return "None"
 
