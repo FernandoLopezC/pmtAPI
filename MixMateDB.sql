@@ -77,12 +77,6 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.users (id, name, email, password, premium) FROM stdin;
-2	admin	admin@admin.com	pbkdf2:sha256:260000$xjMshjLWQpv55NwZ$fba2c74aba40efde6a6c145e0d4a762cae6d97f72c7cd560d143b6f516c5e12b	f
-3	bjh	hhh	pbkdf2:sha256:260000$dcPfvjww4a6hC7TV$ffcc435df976f90bf91ebd248c0154bb39f4276477bf9c3b9de788a54abb6395	f
-\.
-
-
 --
 -- TOC entry 3317 (class 0 OID 0)
 -- Dependencies: 210
