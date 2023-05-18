@@ -10,8 +10,9 @@ import sys
 app = Flask(__name__)
 app.config.from_object(Config)
 
-db = SQLAlchemy(app)
-db.Model.metadata.reflect(db.engine)
+with app.app_context():
+    db = SQLAlchemy(app)
+    db.Model.metadata.reflect(db.engine)
 
 
 login = LoginManager(app)

@@ -174,8 +174,6 @@ def update_details():
     if current_user.is_authenticated:
         form.user_name.data = current_user._user.name
         form.user_email.data = current_user._user.email
-        if not form.user_date_of_birth.data:
-            form.user_date_of_birth.data = current_user._user.date_of_birth
         if form.validate_on_submit():
             cur_user = users_tbl.query.filter_by(id=current_user._user.id).first()
             cur_user.name = form.user_name.data
@@ -184,7 +182,6 @@ def update_details():
             if form.user_new_name.data:
                 cur_user.name = form.user_new_name.data
 
-            cur_user.date_of_birth = form.user_date_of_birth.data
             db.session.commit()
             flash("User details have been updated")
             return redirect(url_for("index"))
