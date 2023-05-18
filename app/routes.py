@@ -147,7 +147,7 @@ def register_app(name, user, pw):
         user.set_password(str(pw))
         db.session.add(user)
         db.session.commit()
-        return jsonify(True)
+        return jsonify({"registration":True})
     else:
         return "None"
 
