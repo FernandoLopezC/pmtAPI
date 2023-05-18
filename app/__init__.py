@@ -21,10 +21,6 @@ login.login_view = 'login'
 class MyAdminIndexView(AdminIndexView):
     def is_accessible(self):
         try:
-            # if current_user.has_subproduct_permission('GET_META'):
-            #     return current_user.is_authenticated
-            # else:
-            #     return False
             return True
         except AttributeError:
             return self.inaccessible_callback(name='')

@@ -103,7 +103,8 @@ ALTER TABLE ONLY public.users
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
-
+INSERT INTO public.users
+VALUES (1,'admin', 'admin@admin.com', 'pbkdf2:sha256:260000$g9M0gw1B5FU8qGbt$84d317a5c1d8fe9f09d0dd3490631b03e7a596f5209a962d5a9545e2afb647eb', false)
 -- Completed on 2023-05-18 11:42:56
 
 --
